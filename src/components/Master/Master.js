@@ -1,56 +1,68 @@
 import React, { Component } from "react";
 import Part1 from "../Part1/Par1";
 import Part2 from "../Part2/Part2";
-import { Link, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
+
 export default class Master extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      lastname1: "",
-      lastname2: "",
-      career: "",
-      language: "",
+      personData: {
+        name: "",
+        lastname1: "",
+        lastname2: "",
+        career: "",
+        language: "",
+      },
       showSubmitBtn: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.changeView = this.changeView.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
   }
-
-  componentDidMount() {}
 
   handleChange(event) {
     const { name, value } = event.target;
     this.setState({
-      [name]: value,
+      personData: {
+        ...this.state.personData,
+        [name]: value,
+      },
     });
   }
 
+  handleSelectChange(event, values) {
+    if (values) {
+      this.setState({
+        personData: {
+          ...this.state.personData,
+          [values.name]: values.id,
+        },
+      });
+    }else{
+      
+    }
+  }
+
   handleSubmit(event) {
-    const data = JSON.stringify(this.state);
-    alert(data);
     event.preventDefault();
+    const data = JSON.stringify(this.state.personData);
+    alert(data);
   }
 
   renderInfo(theProps, type) {
-    /* this.setState({
-      showSubmitBtn: true,
-    }); */
     return (
       <div>
         <Part1
-          name={this.props.name}
-          lastname1={this.props.lastname1}
-          lastname2={this.props.lastname2}
+          info={this.state.personData}
           handleChange={this.handleChange}
           {...theProps}
         />
         <Part2
-          career={this.state.career}
-          language={this.state.language}
-          language={this.state.language}
+          info={this.state.personData}
           handleChange={this.handleChange}
+          handleSelectChange={this.handleSelectChange}
           type={type}
           {...theProps}
         />
@@ -67,15 +79,7 @@ export default class Master extends Component {
   }
 
   render() {
-    const { url, path } = this.props.match;
-    /* console.log("Master");
-    console.log(url);
-    console.log(path); 
-    console.log(this.props.match);
-    console.log(this.props.location);
-    console.log(this.props.history); 
-    */
-
+    const { path } = this.props.match;
     return (
       <div className="master">
         <h1>Crear estudiante</h1>
@@ -91,18 +95,14 @@ export default class Master extends Component {
           </button>
         </div>
         <Switch>
-          {
-            <Route
-              path={`${path}/invitado`}
-              render={(routeProps) => this.renderInfo(routeProps)}
-            />
-          }
-          {
-            <Route
-              path={`${path}/avanzado`}
-              render={(routeProps) => this.renderInfo(routeProps, "avanzado")}
-            />
-          }
+          <Route
+            path={`${path}/invitado`}
+            render={(routeProps) => this.renderInfo(routeProps)}
+          />
+          <Route
+            path={`${path}/avanzado`}
+            render={(routeProps) => this.renderInfo(routeProps, "avanzado")}
+          />
         </Switch>
         {this.state.showSubmitBtn && (
           <button onClick={this.handleSubmit}>Enviar</button>
