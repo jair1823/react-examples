@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import Master from "./components/Master/Master";
+import { Route, Switch, Link } from "react-router-dom";
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <Link to="/">Inicio</Link>
+        <br />
+        <Link to="/crear/vinculado">Vinculado</Link>
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+        <Switch>
+          <Route path="/" exact>
+            <h1>Home</h1>
+          </Route>
+          {/* <Route path="/crear/vinculado" component={Master} /> */}
+          <Route
+            path="/crear/vinculado"
+            render={(routeProps) => {
+              return <Master {...routeProps} />;
+            }}
+          />
+        </Switch>
+      </div>
+    );
+  }
 }
 
 export default App;
