@@ -32,16 +32,21 @@ export default class Master extends Component {
     });
   }
 
-  handleSelectChange(event, values) {
+  handleSelectChange(event, values, prueba) {
     if (values) {
       this.setState({
         personData: {
           ...this.state.personData,
-          [values.name]: values.id,
+          [prueba]: values.id,
         },
       });
-    }else{
-      
+    } else {
+      this.setState({
+        personData: {
+          ...this.state.personData,
+          [prueba]: values,
+        },
+      });
     }
   }
 
@@ -64,6 +69,8 @@ export default class Master extends Component {
           handleChange={this.handleChange}
           handleSelectChange={this.handleSelectChange}
           type={type}
+          select1="career"
+          select2="language"
           {...theProps}
         />
       </div>

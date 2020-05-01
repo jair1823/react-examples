@@ -2,21 +2,28 @@ import React, { Component } from "react";
 import SelectAuto from "../SelectAuto/SelectAuto";
 
 export default class Part2 extends Component {
-  data = [
+  careers = [
     {
       id: "Turismo",
       title: "Turismo",
-      name: "career",
     },
     {
       id: "Compu",
       title: "Compu",
-      name: "career",
     },
     {
       id: "Admi",
       title: "Admi",
-      name: "career",
+    },
+  ];
+  languages = [
+    {
+      id: 1,
+      title: "Español",
+    },
+    {
+      id: 2,
+      title: "Ingles",
     },
   ];
 
@@ -31,39 +38,21 @@ export default class Part2 extends Component {
         <div>
           <label htmlFor="career">Carrera</label>
           <SelectAuto
-            list={this.data}
+            list={this.careers}
             onChange={this.props.handleSelectChange}
             label="Carrera"
-            name="career"
+            name={this.props.select1}
           />
-          {/* <select
-            name="career"
-            onChange={this.props.handleChange}
-            value={this.props.info.career}
-          >
-            <option value="" disabled>
-              No joda
-            </option>
-            <option value="Admin">Admin</option>
-            <option value="Turismo">Turismo</option>
-            <option value="Compu">Compu</option>
-          </select> */}
         </div>
         {this.props.type && (
           <div>
             <label htmlFor="language">Idioma</label>
-            <select
-              name="language"
-              onChange={this.props.handleChange}
-              value={this.props.info.language}
-            >
-              <option value="" disabled>
-                No joda
-              </option>
-              <option value="L1">Español</option>
-              <option value="L2">Ingles</option>
-              <option value="L3">Taka Taka</option>
-            </select>
+            <SelectAuto
+              list={this.languages}
+              onChange={this.props.handleSelectChange}
+              label="Lenguaje"
+              name={this.props.select2}
+            />
           </div>
         )}
       </div>
