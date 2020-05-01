@@ -58,7 +58,7 @@ export default class Master extends Component {
 
   renderInfo(theProps, type) {
     return (
-      <div>
+      <di>
         <Part1
           info={this.state.personData}
           handleChange={this.handleChange}
@@ -89,7 +89,7 @@ export default class Master extends Component {
     const { path } = this.props.match;
     return (
       <div className="master">
-        <h1>Crear estudiante</h1>
+        <h1>Crear estudianteeee</h1>
         <div>
           <button onClick={this.changeView} value="/invitado">
             Basico
